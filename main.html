@@ -2,30 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Video Speed Scrubber</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Video Speed Controller</title>
+  <style>
+    body { margin: 0; background: #1a1a2e; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    .player { background: #000; border-radius: 8px; overflow: hidden; width: 765px; }
+    .player__video { width: 100%; display: block; }
+    .progress { display: flex; height: 10px; background: #555; cursor: pointer; }
+    .progress__filled { background: #e74c3c; width: 0%; flex: 0; transition: width 0.1s; }
+    .player__controls { display: flex; align-items: center; gap: 10px; padding: 10px; background: #222; flex-wrap: wrap; }
+    .player__button { background: none; border: none; color: white; font-size: 20px; cursor: pointer; }
+    input[type="range"] { cursor: pointer; }
+  </style>
 </head>
 <body>
-
-  <div class="wrapper">
-    <video class="flex" width="765" height="430" src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4" controls></video>
-    <div class="speed">
-      <div class="speed-bar">1×</div>
+  <div class="player">
+    <video class="player__video" src="https://www.w3schools.com/html/mov_bbb.mp4"></video>
+    <div class="progress">
+      <div class="progress__filled"></div>
+    </div>
+    <div class="player__controls">
+      <button class="player__button toggle">►</button>
+      <input type="range" name="volume" class="player__slider" min="0" max="1" step="0.05" value="1">
+      <input type="range" name="playbackSpeed" class="player__slider" min="0.5" max="2" step="0.1" value="1">
+      <button class="player__button skip" data-skip="-10">« 10s</button>
+      <button class="player__button skip" data-skip="25">25s »</button>
     </div>
   </div>
-
-<script  src="./script.js">
-  //Your code goes here
-	const inputs = document.querySelectorAll('.controls input');
-
-    function handleUpdate() {
-      const suffix = this.dataset.sizing || '';
-      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
-    }
-
-    inputs.forEach(input => input.addEventListener('change', handleUpdate));
-    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
-
-</script>
+  <script src="./script.js"></script>
 </body>
 </html>
